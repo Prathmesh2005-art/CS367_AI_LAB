@@ -53,8 +53,8 @@ def bfs(start_state, goal_state):
         count += 1
 
         if state == goal_state:
-            print(f"✅ Total nodes visited: {count}")
-            print(f"📦 Max queue size: {max_size}")
+            print(f"Total nodes visited: {count}")
+            print(f"Max queue size: {max_size}")
             return path
 
         for successor in get_successors(state):
@@ -76,4 +76,5 @@ if solution:
     for step in solution:
         print(step)
 else:
+
     print("No solution found.")
