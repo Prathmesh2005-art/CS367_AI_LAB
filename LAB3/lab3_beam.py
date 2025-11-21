@@ -10,7 +10,7 @@ class Node:
         return Node(self.state.copy())
 
 
-# -------------------- Heuristics & Checks -------------------- #
+# Heuristics & Checks 
 def heuristic_value_1(clauses, node):
     """
     Heuristic 1: Number of satisfied clauses (classic).
@@ -59,7 +59,7 @@ def check_solution(clauses, node):
     return True
 
 
-# -------------------- Neighbor Generators -------------------- #
+# Neighbor Generators 
 def gen_successor_best_onebit(node, clauses):
     """
     Standard greedy neighbor: flip each bit and choose the neighbor
@@ -109,7 +109,7 @@ def generate_random_multi_bit_successor(node, bits_to_flip=2):
     return Node(temp)
 
 
-# -------------------- Hill Climbing (single restart) -------------------- #
+# Hill Climbing (single restart) 
 def hill_climb(clauses, start_node, max_iter=1000):
     """
     Greedy hill climb from start_node using single-bit best-improvement.
@@ -127,7 +127,7 @@ def hill_climb(clauses, start_node, max_iter=1000):
     return node
 
 
-# -------------------- Beam Search -------------------- #
+# Beam Search 
 def beam_search(clauses, n_vars, beam_width=3, max_iter=1000):
     """
     Beam search:
@@ -179,7 +179,7 @@ def beam_search(clauses, n_vars, beam_width=3, max_iter=1000):
     return None
 
 
-# -------------------- Penetrance / Experiment -------------------- #
+# Penetrance / Experiment 
 def calculate_penetrance(num_instances, k, m, n_vars, beam_width=3, max_iter=500):
     solved_count = 0
     for _ in range(num_instances):
@@ -191,7 +191,7 @@ def calculate_penetrance(num_instances, k, m, n_vars, beam_width=3, max_iter=500
     return penetrance
 
 
-# -------------------- Example usage -------------------- #
+# Example usage 
 if _name_ == "_main_":
     # small sanity example (adjust params to taste)
     k = 3
@@ -201,4 +201,5 @@ if _name_ == "_main_":
     beam_w = 5
     print(f"Running {trials} instances of {k}-SAT (m={m}, n={n}) with beam_width={beam_w} ...")
     p = calculate_penetrance(trials, k, m, n, beam_width=beam_w, max_iter=300)
+
     print(f"Penetrance (success rate): {p:.2f}%")
