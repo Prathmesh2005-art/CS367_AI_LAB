@@ -2,13 +2,13 @@ from lab3_gen import generate_k_sat_problem
 import random
 
 
-# ----------------------------- Node Definition ----------------------------- #
+# Node Definition 
 class Node:
     def _init_(self, state):
         self.state = state  # binary assignment list [0,1,1,0,...]
 
 
-# ----------------------------- Heuristic Functions ----------------------------- #
+# Heuristic Functions 
 def heuristic_value_1(clauses, node):
     """Heuristic 1: Count number of satisfied clauses."""
     count = 0
@@ -35,7 +35,7 @@ def heuristic_value_2(clauses, node):
     return count
 
 
-# ----------------------------- Solution Check ----------------------------- #
+#  Solution Check 
 def check_solution(clauses, node):
     """Return True if node satisfies all clauses."""
     if node is None:
@@ -52,7 +52,7 @@ def check_solution(clauses, node):
     return satisfied == len(clauses)
 
 
-# ----------------------------- Successor Generators ----------------------------- #
+# Successor Generators 
 def gen_1(node, clauses):
     """Generate successor by flipping one bit at a time (standard hill climb)."""
     best_value = -1
@@ -124,13 +124,13 @@ def gen_3(node, clauses, num_neighbors=10):
     return best_node
 
 
-# ----------------------------- Hill Climb ----------------------------- #
+# Hill Climb 
 def hill_climb(clauses, node, gen_func, max_iter=1000):
     """Perform hill climbing using specified generator."""
     prev_node = node
     for i in range(max_iter):
         if check_solution(clauses, node):
-            print("✅ Solution found")
+            print("Solution found")
             print(f"Clause set: {clauses}")
             print(f"Solution: {node.state}")
             print(f"Steps required: {i}")
@@ -147,37 +147,37 @@ def hill_climb(clauses, node, gen_func, max_iter=1000):
     return node
 
 
-# ----------------------------- Variable Generation Node ----------------------------- #
+# Variable Generation Node 
 def vgn(clauses, k, m, n):
     """Run hill climbing with progressively more powerful neighbor generators."""
     node = Node([random.choice([0, 1]) for _ in range(n)])
 
     # First generator
-    print("\n🧩 Running gen_1 ...")
+    print("\n Running gen_1 ...")
     node = hill_climb(clauses, node, gen_1)
     if check_solution(clauses, node):
-        print("✅ Found solution using gen_1")
+        print(" Found solution using gen_1")
         return True
 
     # Second generator
     print("\n⚙ Running gen_2 ...")
     node = hill_climb(clauses, node, gen_2)
     if check_solution(clauses, node):
-        print("✅ Found solution using gen_2")
+        print(" Found solution using gen_2")
         return True
 
     # Third generator
-    print("\n🚀 Running gen_3 ...")
+    print("\n Running gen_3 ...")
     node = hill_climb(clauses, node, gen_3)
     if check_solution(clauses, node):
-        print("✅ Found solution using gen_3")
+        print(" Found solution using gen_3")
         return True
 
-    print("❌ No satisfying assignment found.")
+    print(" No satisfying assignment found.")
     return False
 
 
-# ----------------------------- Penetrance Calculation ----------------------------- #
+# Penetrance Calculation 
 def calculate_penetrance(num_instances, k, m, n):
     """Calculate the success rate of solving k-SAT using hill climbing."""
     solved_count = 0
@@ -188,11 +188,12 @@ def calculate_penetrance(num_instances, k, m, n):
             solved_count += 1
 
     penetrance = (solved_count / num_instances) * 100
-    print(f"\n📊 Penetrance (Success Rate): {penetrance:.2f}%")
+    print(f"\n Penetrance (Success Rate): {penetrance:.2f}%")
     return penetrance
 
 
 # ----------------------------- Main ----------------------------- #
 if _name_ == "_main_":
     # Example: k=3 (3-SAT), m=10 clauses, n=10 variables
+
     calculate_penetrance(num_instances=20, k=3, m=10, n=10)
