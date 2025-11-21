@@ -1,6 +1,6 @@
 import heapq
 
-# ----------------------------- Node Definition -----------------------------
+# Node Definition 
 
 class SolitaireNode:
     def __init__(self, state, parent=None, g=0, h=0, w1=1, w2=1):
@@ -21,7 +21,7 @@ class SolitaireNode:
         return self.f < other.f
 
 
-# ----------------------------- Helper Functions -----------------------------
+# Helper Functions 
 
 def get_possible_moves(state):
     """
@@ -64,7 +64,7 @@ def apply_move(state, move):
     return new_state
 
 
-# ----------------------------- Heuristic Functions -----------------------------
+# Heuristic Functions
 
 def heuristic_1(state):
     """Heuristic 1: Number of marbles remaining (lower is better)."""
@@ -82,7 +82,7 @@ def heuristic_2(state):
     return total_distance
 
 
-# ----------------------------- Search Algorithms -----------------------------
+# Search Algorithms
 
 def best_first_search(initial_state, heuristic_func):
     """
@@ -167,7 +167,7 @@ def a_star_search(initial_state, heuristic_func):
     return None
 
 
-# ----------------------------- Main Execution -----------------------------
+# Main Execution 
 
 if __name__ == "__main__":
     start_state = [
@@ -187,3 +187,4 @@ if __name__ == "__main__":
 
     best_first_search(start_state, heuristic_2)
     a_star_search(start_state, heuristic_2)
+
