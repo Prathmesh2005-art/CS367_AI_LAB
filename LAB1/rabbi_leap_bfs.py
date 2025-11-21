@@ -74,7 +74,7 @@ def bfs(start_state, goal_state):
 
         # Goal check
         if state == goal_state:
-            print(f"\n✅ Solution Found!")
+            print(f"\n Solution Found!")
             print(f"Total Nodes Visited: {nodes_visited}")
             print(f"Maximum Queue Size: {max_queue_size}")
             return path
@@ -98,3 +98,4 @@ if solution:
         print(step)
 else:
     print("\nNo solution found.")
+
