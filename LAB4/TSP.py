@@ -137,8 +137,9 @@ if __name__ == "__main__":
     cities, D = compute_distance_matrix(locations)
     best_tour, best_cost, cost_history = simulated_annealing(D)
 
-    print("\n🏙️  Best Tour Sequence:")
+    print("\n Best Tour Sequence:")
     print(" → ".join(cities[i] for i in best_tour))
-    print(f"\n🛣️  Best Tour Cost: {best_cost:.4f}")
+    print(f"\n  Best Tour Cost: {best_cost:.4f}")
 
     plot_results(cities, locations, best_tour, cost_history)
+
