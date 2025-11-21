@@ -4,14 +4,14 @@ import spacy
 import string
 
 
-# ---------------------------- File Reading ---------------------------- #
+# - File Reading - #
 def read_file(file_path):
     """Read and return content from a file."""
     with open(file_path, "r", encoding="utf-8") as file:
         return file.read()
 
 
-# ---------------------------- Sentence Extraction ---------------------------- #
+# - Sentence Extraction - #
 def extract_sentences(text):
     """Extract and lowercase sentences using spaCy."""
     text = text.lower()
@@ -25,7 +25,7 @@ def remove_punctuation(sentence):
     return sentence.translate(str.maketrans("", "", string.punctuation)).replace("\n", " ")
 
 
-# ---------------------------- Text Processing ---------------------------- #
+# - Text Processing - #
 def process_text_file(file_path):
     """Read file, extract sentences, and clean punctuation."""
     content = read_file(file_path)
@@ -34,7 +34,7 @@ def process_text_file(file_path):
     return cleaned_sentences
 
 
-# ---------------------------- Node Class ---------------------------- #
+# - Node Class - #
 class Node:
     def _init_(self, state, parent=None, g=0, h=0, w1=1, w2=1):
         self.state = state
@@ -47,12 +47,12 @@ class Node:
         return self.f < other.f
 
 
-# ---------------------------- Global Docs ---------------------------- #
+# - Global Docs - #
 document1 = []
 document2 = []
 
 
-# ---------------------------- Utility Functions ---------------------------- #
+# - Utility Functions - #
 def get_difference(index_doc1=None, index_doc2=None):
     """Compute difference in characters between two sentences."""
     sentence1 = document1[index_doc1] if index_doc1 is not None else ""
@@ -90,7 +90,7 @@ def distance(state, goal_state):
     return dist
 
 
-# ---------------------------- Edit Distance ---------------------------- #
+# - Edit Distance - #
 def char_level_edit_distance(str1, str2):
     """Compute character-level edit distance (Levenshtein)."""
     n, m = len(str1), len(str2)
@@ -126,7 +126,7 @@ def edit_distance_cost(state):
     return 0
 
 
-# ---------------------------- A* Successors ---------------------------- #
+# - A* Successors - #
 def get_successors(node):
     """Return next valid states from current node."""
     moves = [(1, 1, 0), (0, 1, 1), (1, 0, 2)]
@@ -137,7 +137,7 @@ def get_successors(node):
     return successors
 
 
-# ---------------------------- A* Algorithm ---------------------------- #
+# - A* Algorithm - #
 def a_star(start_state, goal_state):
     """Run A* search algorithm."""
     start_node = Node(start_state)
@@ -159,7 +159,7 @@ def a_star(start_state, goal_state):
             while node:
                 path.append(node.state)
                 node = node.parent
-            print(f"✅ Total nodes explored: {explored}")
+            print(f"Total nodes explored: {explored}")
             return path[::-1]
 
         for successor in get_successors(node):
@@ -173,7 +173,7 @@ def a_star(start_state, goal_state):
     return None
 
 
-# ---------------------------- Document Alignment ---------------------------- #
+# - Document Alignment - #
 def align_documents(states, start_state, goal_state):
     """Construct aligned document using computed path."""
     new_doc = []
@@ -197,7 +197,7 @@ def word_count(sentence):
     return len(sentence.split())
 
 
-# ---------------------------- Main Execution ---------------------------- #
+# - Main Execution - #
 if _name_ == "_main_":
     document1 = process_text_file("doc1.txt")
     document2 = process_text_file("doc2.txt")
@@ -210,15 +210,16 @@ if _name_ == "_main_":
 
     if result_path:
         aligned_doc = align_documents(result_path, start_state, goal_state)
-        print("\n🧩 Aligned Document:")
+        print("\n Aligned Document:")
         print(aligned_doc)
 
-        print(f"\n📝 Document1 ({len(document1)} sentences): {document1}")
-        print(f"📝 Document2 ({len(document2)} sentences): {document2}")
+        print(f"\n Document1 ({len(document1)} sentences): {document1}")
+        print(f"Document2 ({len(document2)} sentences): {document2}")
 
         for i in range(min(len(aligned_doc), len(document2))):
             dist = char_level_edit_distance(aligned_doc[i], document2[i])
-            print(f"\n🔹 Sentence pair {i+1}:")
+            print(f"\n Sentence pair {i+1}:")
             print(f"Doc3: {aligned_doc[i]}")
             print(f"Doc2: {document2[i]}")
+
             print(f"Edit distance = {dist}")
