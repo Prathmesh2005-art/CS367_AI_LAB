@@ -86,7 +86,7 @@ def bfs(start_state, goal_state):
     return None
 
 
-# --- Main Execution ---
+# Main Execution 
 start_state = (0, 0, 0, -1, 1, 1, 1)
 goal_state = (1, 1, 1, -1, 0, 0, 0)
 
@@ -98,4 +98,5 @@ if solution:
         print(step)
 else:
     print("\nNo solution found.")
+
 
