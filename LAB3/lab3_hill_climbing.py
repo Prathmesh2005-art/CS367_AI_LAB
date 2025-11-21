@@ -75,7 +75,7 @@ def hill_climb(clause, k, m, n, max_iter=1000):
 
     for i in range(max_iter):
         if check(clause, node):
-            print("\n✅ Solution found!")
+            print("\n Solution found!")
             print(f"Solution: {node.state}")
             print(f"Steps required: {i}")
             return True
@@ -87,7 +87,7 @@ def hill_climb(clause, k, m, n, max_iter=1000):
 
         node = successor
 
-    print("\n❌ Max iterations reached without finding a solution.")
+    print("\n Max iterations reached without finding a solution.")
     return False
 
 
@@ -95,16 +95,16 @@ def hill_climb(clause, k, m, n, max_iter=1000):
 def calculate_penetrance(num_instances, k, m, n):
     solved_count = 0
     for i in range(num_instances):
-        print(f"\n🧩 Running instance {i+1}/{num_instances} ...")
+        print(f"\n Running instance {i+1}/{num_instances} ...")
         clauses = generate_k_sat_problem(k, m, n)
         if hill_climb(clauses, k, m, n):
             solved_count += 1
     penetrance = (solved_count / num_instances) * 100
-    print(f"\n✅ Penetrance (success rate): {penetrance:.2f}%")
+    print(f"\n Penetrance (success rate): {penetrance:.2f}%")
     return penetrance
 
 
-# ------------------ Main Execution ------------------
+# Main Execution 
 
 if _name_ == "_main_":
     k, m, n = 3, 100, 100
@@ -112,4 +112,5 @@ if _name_ == "_main_":
     print("Generated Clause Example:\n", clause[:5], "...\n")
 
     # Test with 20 random SAT instances
+
     calculate_penetrance(20, 3, 50, 50)
