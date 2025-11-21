@@ -132,7 +132,7 @@ class Agent:
         return (len(self.frontier) + len(self.explored)) * 56
 
 
-# ---------- Heuristics ----------
+#  Heuristics 
 def heuristic0(curr_state, goal_state):
     """Trivial heuristic (Uniform Cost Search)."""
     return 0
@@ -161,7 +161,7 @@ def heuristic2(curr_state, goal_state):
     return dist
 
 
-# ---------- Main Experiment ----------
+# Main Experiment 
 goal_state = np.array([[1, 2, 3], [8, "_", 4], [7, 6, 5]])
 depths = np.arange(0, 501, 50)
 
@@ -190,4 +190,5 @@ for depth in depths:
     memories[depth] = avg_mem
     print(f"Depth {depth:3d} | Avg Time: {avg_time:.5f}s | Avg Memory: {avg_mem:.2f} bytes")
 
-print("\n✅ Experiment completed successfully.")
+
+print("\n Experiment completed successfully.")
